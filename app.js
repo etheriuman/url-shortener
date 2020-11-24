@@ -7,6 +7,9 @@ const app = express()
 
 const port = 3000
 
+// 連接 mongodb 資料庫
+require('./config/mongoose')
+
 // 設定樣板引擎
 app.set('view engine', 'handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
