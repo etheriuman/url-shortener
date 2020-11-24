@@ -16,6 +16,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 
 // 設定 middle ware
 app.use(
+  express.static('public'),
   bodyParser.urlencoded({extended: true})
 )
 
@@ -26,7 +27,8 @@ app.get('/', (req, res) => {
 
 // 送出短網址表單
 app.post('/shorten', (req, res) => {
-  // .....動作
+  const url = req.body.url
+  
 })
 
 // 啟動伺服器等待
