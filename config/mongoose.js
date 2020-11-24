@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const db = mongoose.connection
 
 // 連線到 mongodb
-mongoose.connect('mongodb://localhost/URL-shortener', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/url-shortener', { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 設定連線狀態
 db.on('error', () => {

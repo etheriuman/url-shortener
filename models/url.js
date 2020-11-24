@@ -5,11 +5,11 @@ const Schema = mongoose.Schema
 
 // 設定資料型態
 const urlSchema = new Schema({
-  originUrl: {
+  name: {
     type: String,
     required: true
   },
-  shortenUrl: {
+  code: {
     type: String,
     required: true
   }

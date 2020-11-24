@@ -16,6 +16,7 @@ function generateCode() {
     code.push(box[randomIndex])
   }
 
+  // 合併陣列內容
   return code.join('')
 
 }
