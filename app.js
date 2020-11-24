@@ -7,7 +7,7 @@ const routes = require('./routes')
 
 const app = express()
 
-const port = 3000
+const port = process.env.PORT || 3000
 
 // 連接 mongodb 資料庫
 require('./config/mongoose')
@@ -22,8 +22,6 @@ app.use(
   bodyParser.urlencoded({extended: true}),
   routes
 )
-
-
 
 
 // 啟動伺服器等待 -----
