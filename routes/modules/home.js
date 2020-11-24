@@ -10,6 +10,8 @@ const generateCode = require('../../public/javascripts/generateCode')
 // 載入 data model
 const Url = require('../../models/url')
 
+// 載入 mongoose 連線狀態
+const db = require('../../config/mongoose')
 
 
 // 設定路由：
@@ -54,6 +56,7 @@ router.post('/', (req, res) => {
                     })
                 // 渲染畫面
                 .then(() => res.render('index', { code }))
+                .then(() => db.close())
                 .catch(error => console.log(error))
               // 如果沒找到：
               } else {
@@ -65,12 +68,15 @@ router.post('/', (req, res) => {
                     })
                     // 渲染畫面
                    .then(() => res.render('index', { code }))
+                   .then(() => db.close())
                    .catch(error => console.log(error))
               }
             })
+            .then(() => db.close())
             .catch(error => console.log(error))
        }
      })
+     .then(() => db.close())
      .catch(error => console.log(error))
 })
 
