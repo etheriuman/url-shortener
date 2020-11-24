@@ -1,7 +1,7 @@
 // 載入插件
 const express = require('express')
 const exphbs = require('express-handlebars')
-
+const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -13,6 +13,11 @@ require('./config/mongoose')
 // 設定樣板引擎
 app.set('view engine', 'handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+
+// 設定 middle ware
+app.use(
+  bodyParser.urlencoded({extended: true})
+)
 
 // 首頁
 app.get('/', (req, res) => {

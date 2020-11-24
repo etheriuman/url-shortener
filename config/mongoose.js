@@ -1,7 +1,10 @@
+// 載入 mongoose
 const mongoose = require('mongoose')
 
+// 連線狀態
 const db = mongoose.connection
 
+// 連線到 mongodb
 mongoose.connect('mongodb://localhost/URL-shortener', { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 設定連線狀態
