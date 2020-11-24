@@ -56,7 +56,6 @@ router.post('/', (req, res) => {
                     })
                 // 渲染畫面
                 .then(() => res.render('index', { code }))
-                .then(() => db.close())
                 .catch(error => console.log(error))
               // 如果沒找到：
               } else {
@@ -68,16 +67,14 @@ router.post('/', (req, res) => {
                     })
                     // 渲染畫面
                    .then(() => res.render('index', { code }))
-                   .then(() => db.close())
                    .catch(error => console.log(error))
               }
             })
-            .then(() => db.close())
             .catch(error => console.log(error))
        }
      })
-     .then(() => db.close())
      .catch(error => console.log(error))
+     .then(() => db.close())
 })
 
 
