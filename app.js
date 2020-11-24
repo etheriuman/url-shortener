@@ -25,11 +25,13 @@ app.use(
 )
 
 // 首頁 -----
+
 app.get('/', (req, res) => {
   res.render('index')
 })
 
 // 送出短網址表單 -----
+
 app.post('/', (req, res) => {
   // 得到輸入的網址
   const inputUrl = req.body.url
@@ -43,7 +45,7 @@ app.post('/', (req, res) => {
          // 取出 url 的 code
          const code = url[0].code
          // 渲染畫面
-         res.render('index', { code })
+         res.render('index', { code, port })
        // 如果沒找到：
        } else {
          console.log('沒有找到匹配資料，生成一組code並開始進行後續動作！')
@@ -63,7 +65,7 @@ app.post('/', (req, res) => {
                       code: code
                     })
                 // 渲染畫面
-                   .then(() => res.render('index', { code }))
+                .then(() => res.render('index', { code, port }))
               // 如果沒找到：
               } else {
                 console.log('沒有找到重複的code，直接生成資料，渲染畫面！')
@@ -73,13 +75,22 @@ app.post('/', (req, res) => {
                       code: code
                     })
                     // 渲染畫面
-                   .then(() => res.render('index', { code }))
+                   .then(() => res.render('index', { code, port }))
               }
             })
        }
      })
 })
 
+// 短網址請求
+app.get('/shorten/:code', (req, res) => {
+  const code = req.params.code
+  Url.findOne({ code: code })
+     .then(url => {
+       res.redirect(url.name)
+     .catch(error => console.log(error))
+     })
+})
 
 
 // 啟動伺服器等待 -----
