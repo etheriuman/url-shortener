@@ -2,10 +2,8 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
-const Url = require('./models/url')
+const routes = require('./routes')
 
-// 載入 generateCode 序碼產生器
-const generateCode = require('./public/javascripts/generateCode')
 
 const app = express()
 
@@ -21,76 +19,11 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 // 設定 middle ware
 app.use(
   express.static('public'),
-  bodyParser.urlencoded({extended: true})
+  bodyParser.urlencoded({extended: true}),
+  routes
 )
 
-// 首頁 -----
 
-app.get('/', (req, res) => {
-  res.render('index')
-})
-
-// 送出短網址表單 -----
-
-app.post('/', (req, res) => {
-  // 得到輸入的網址
-  const inputUrl = req.body.url
-  console.log(inputUrl)
-  // 尋找db是否有該url的項目
-  Url.find({ name: inputUrl })
-     .then(url => {
-       // 如果有找到：
-       if (url.length) {
-         console.log('找到了匹配資料，渲染畫面！')
-         // 取出 url 的 code
-         const code = url[0].code
-         // 渲染畫面
-         res.render('index', { code, port })
-       // 如果沒找到：
-       } else {
-         console.log('沒有找到匹配資料，生成一組code並開始進行後續動作！')
-         // 創建一組 code
-         const code = generateCode()
-         // 尋找是否已經有相同 code 存在：
-         Url.find({ code: code })
-            .then(url => {
-              // 如果有找到：
-              if (url.length) {
-                console.log('找到重複的code，重新生成一組code並生成資料，渲染畫面！')
-                // 重新生成一組 code
-                code = generateCode()
-                // 生成資料
-                Url.create({
-                      name: inputUrl,
-                      code: code
-                    })
-                // 渲染畫面
-                .then(() => res.render('index', { code, port }))
-              // 如果沒找到：
-              } else {
-                console.log('沒有找到重複的code，直接生成資料，渲染畫面！')
-                // 生成資料
-                Url.create({
-                      name: inputUrl,
-                      code: code
-                    })
-                    // 渲染畫面
-                   .then(() => res.render('index', { code, port }))
-              }
-            })
-       }
-     })
-})
-
-// 短網址請求
-app.get('/shorten/:code', (req, res) => {
-  const code = req.params.code
-  Url.findOne({ code: code })
-     .then(url => {
-       res.redirect(url.name)
-     .catch(error => console.log(error))
-     })
-})
 
 
 // 啟動伺服器等待 -----
