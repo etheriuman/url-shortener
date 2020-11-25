@@ -7,7 +7,7 @@
   </a>
   <div class="row justify-content-center mt-5 mb-3 text-monospace text-muted">click the logo to reset input</div>
   <form action="/" class="row justify-content-center" method="POST">
-    <input type="url" id="url-input" class="form-control mb-5" placeholder="input URL here" value="{{#if code}}{{localhost}}{{/if}}{{ code }}" name="url" required>
+    <input type="url" id="url-input" class="form-control mb-5" placeholder="input URL here" value="{{#if code}}{{host}}{{/if}}{{ code }}" name="url" required>
     {{#unless code}}<button type="submit" class="col-8 col-sm-4 btn btn-primary">Shorten</button>{{/unless}}
     {{#if code}}<a onclick="copyOnClick()" id="copy-button" class="col-8 col-sm-4 btn btn-info">Copy</a>{{/if}}
   </form>
