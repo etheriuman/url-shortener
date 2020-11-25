@@ -10,12 +10,9 @@ const generateCode = require('../../public/javascripts/generateCode')
 // 載入 data model
 const Url = require('../../models/url')
 
-// 載入 mongoose 連線狀態
-const db = require('../../config/mongoose')
 
-
-// 解析 port 當前的狀態
-const localhost = process.env.PORT === 3000? 'http://localhost:3000/shorten/' : 'https://polar-river-15707.herokuapp.com/shorten/'
+// 解析 port 當前的狀態 決定要回傳那個 localhost
+const localhost = process.env.PORT ? 'https://polar-river-15707.herokuapp.com/shorten/' : 'http://localhost:3000/shorten/'
 
 
 // 設定路由：
