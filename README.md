@@ -2,7 +2,7 @@
   輸入你想要去的網址，讓短網址產生器來幫你產生一組短網址！
   [現在就去試試!](https://polar-river-15707.herokuapp.com/)
 
-![Image]()
+![Image](https://github.com/etheriuman/url-shortener/blob/master/url-shortener-image.png)
 ---
 - ## 運行環境需求:
   Node.js
