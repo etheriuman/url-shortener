@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
                     })
                 // 渲染畫面
                 .then(() => res.render('index', { code }))
-                .catch(error => console.log(error))
+
               // 如果沒找到：
               } else {
                 console.log('沒有找到重複的code，直接生成資料，渲染畫面！')
@@ -67,14 +67,13 @@ router.post('/', (req, res) => {
                     })
                     // 渲染畫面
                    .then(() => res.render('index', { code }))
-                   .catch(error => console.log(error))
+
               }
             })
-            .catch(error => console.log(error))
+
        }
      })
-     .catch(error => console.log(error))
-     .then(() => db.close())
+
 })
 
 
