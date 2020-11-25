@@ -1,12 +1,13 @@
 <div class="container p-5">
-  <div class="row mb-5 justify-content-center">
+  <div href="/" class="row mb-5 justify-content-center">
     <h1>URL Shortener</h1>
   </div>
-  <div class="row justify-content-center mb-5">
+  <a href="/" class="row justify-content-center mb-5">
     <img class="col-6 col-sm-3" src="https://www.flaticon.com/svg/static/icons/svg/3221/3221956.svg" alt="chain">
-  </div>
+  </a>
+  <div class="row justify-content-center mt-5 mb-3 text-monospace text-muted">click the logo to reset input</div>
   <form action="/" class="row justify-content-center" method="POST">
-    <input type="url" id="url-input" class="form-control my-5" placeholder="input URL here" value="{{#if code}}http://localhost:3000/shorten/{{/if}}{{ code }}" name="url" required>
+    <input type="url" id="url-input" class="form-control mb-5" placeholder="input URL here" value="{{#if code}}{{localhost}}{{/if}}{{ code }}" name="url" required>
     {{#unless code}}<button type="submit" class="col-8 col-sm-4 btn btn-primary">Shorten</button>{{/unless}}
     {{#if code}}<a onclick="copyOnClick()" id="copy-button" class="col-8 col-sm-4 btn btn-info">Copy</a>{{/if}}
   </form>

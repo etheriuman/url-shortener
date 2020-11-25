@@ -14,6 +14,10 @@ const Url = require('../../models/url')
 const db = require('../../config/mongoose')
 
 
+// 解析 port 當前的狀態
+const localhost = process.env.PORT === 3000? 'http://localhost:3000/shorten/' : 'https://polar-river-15707.herokuapp.com/shorten/'
+
+
 // 設定路由：
 
 // 首頁
@@ -35,7 +39,7 @@ router.post('/', (req, res) => {
          // 取出 url 的 code
          const code = url[0].code
          // 渲染畫面
-         res.render('index', { code })
+         res.render('index', { code, localhost })
        // 如果沒找到：
        } else {
          console.log('沒有找到匹配資料，生成一組code並開始進行後續動作！')
@@ -54,8 +58,8 @@ router.post('/', (req, res) => {
                       name: inputUrl,
                       code: code
                     })
-                // 渲染畫面
-                .then(() => res.render('index', { code }))
+                   // 渲染畫面
+                   .then(() => res.render('index', { code, localhost }))
               // 如果沒找到：
               } else {
                 console.log('沒有找到重複的code，直接生成資料，渲染畫面！')
@@ -65,7 +69,7 @@ router.post('/', (req, res) => {
                       code: code
                     })
                     // 渲染畫面
-                   .then(() => res.render('index', { code }))
+                   .then(() => res.render('index', { code, localhost }))
               }
             })
        }
